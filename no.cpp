@@ -1,21 +1,32 @@
 #include <iostream>
+#include <iomanip> // для std::setw
+using namespace std;
 
 int main() {
-	int a;
-	int b;
+    int length, width;
+    cout << "Enter snake's length: ";
+    cin >> length;
+    cout << "Enter snake's width: ";
+    cin >> width;
 
-	std::cout << "Type first number: ";
-	std::cin >> a;
-	std::cout << "Type second number: ";
-	std::cin >> b;
+    int num = 1; // начинаем с 1 для удобства
 
-	int sum = a + b;
-	int dif = a - b;
-	int ab = a * b;
+    for (int row = 0; num <= length; row++) {
+        if (row % 2 == 0) {
+            // Заполняем слева направо
+            for (int i = 0; i < width && num <= length; i++) {
+                cout << setw(3) << num++ << ' ';
+            }
+        } else {
+            // Заполняем справа налево
+            int temp = num + width - 1;
+            for (int i = 0; i < width && temp <= length; i++) {
+                cout << setw(3) << temp-- << ' ';
+            }
+            num += width; // переходим к следующему набору чисел
+        }
+        cout << endl; // переход на новую строку
+    }
 
-	std::cout << "A + B: " << sum << std::endl;
-	std::cout << "A - B: " << dif << std::endl;
-	std::cout << "A * B: " << ab << std::endl;
-
-	return 0;
+    return 0;
 }
